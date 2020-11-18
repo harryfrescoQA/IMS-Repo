@@ -32,6 +32,19 @@ public class Utils {
 		return longInput;
 	}
 
+	public int getInt() {
+		String input = getString();
+		int intInput = 0;
+		do {
+			try {
+				intInput = Integer.parseInt(input);
+			} catch (NumberFormatException nfe) {
+				LOGGER.info("Error - Please enter a number");
+			}
+		} while (intInput == 0);
+		return intInput;
+	}
+	
 	public String getString() {
 		return scanner.nextLine();
 	}
