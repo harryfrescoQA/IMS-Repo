@@ -14,6 +14,12 @@ import com.qa.ims.utils.DBUtils;
 
 public class ItemDAO implements Dao<Item>  {
 	public static final Logger LOGGER = LogManager.getLogger();
+	
+	/**
+	 * Reads all items from the database
+	 * 
+	 * @return A list of items
+	 */
 	@Override
 	public List<Item> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -44,6 +50,11 @@ public class ItemDAO implements Dao<Item>  {
 		return null;
 	}
 	
+	/**
+	 * Creates an item in the database
+	 * 
+	 * @param item - takes in a item object. item_id will be ommited
+	 */
 	@Override
 	public Item create(Item t) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -72,6 +83,13 @@ public class ItemDAO implements Dao<Item>  {
 		return null;
 	}
 	
+	/**
+	 * Updates an item in the database
+	 * 
+	 * @param item - takes in an item object, the item_id field will be used to
+	 *                 update that item in the database
+	 * @return
+	 */
 	@Override
 	public Item update(Item t) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -86,6 +104,11 @@ public class ItemDAO implements Dao<Item>  {
 		return null;
 	}
 
+	/**
+	 * Deletes an item in the database
+	 * 
+	 * @param id - item_id
+	 */
 	@Override
 	public int delete(long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();

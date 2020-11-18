@@ -9,6 +9,10 @@ import com.qa.ims.persistence.dao.ItemDAO;
 import com.qa.ims.persistence.domain.Item;
 import com.qa.ims.utils.Utils;
 
+/**
+ * Takes in item details for CRUD functionality
+ *
+ */
 public class ItemController implements CrudController<Item>  {
 
 	public static final Logger LOGGER = LogManager.getLogger();
@@ -22,7 +26,9 @@ public class ItemController implements CrudController<Item>  {
 		this.utils = utils;
 	}
 
-	
+	/**
+	 * Reads all items to the logger
+	 */
 	@Override
 	public List<Item> readAll() {
 		List<Item> items = itemDAO.readAll();
@@ -32,6 +38,9 @@ public class ItemController implements CrudController<Item>  {
 		return items;
 	}
 
+	/**
+	 * Creates an item by taking in user input
+	 */
 	@Override
 	public Item create() {
 		LOGGER.info("Please enter an item title");
@@ -45,6 +54,10 @@ public class ItemController implements CrudController<Item>  {
 		return item;
 	}
 
+	/**
+	 * Updates an existing item by taking in user input
+	 */
+	
 	@Override
 	public Item update() {
 		LOGGER.info("Please enter the id of the item you would like to update");
@@ -60,6 +73,11 @@ public class ItemController implements CrudController<Item>  {
 		return item;
 	}
 
+	/**
+	 * Deletes an existing item by the item_id
+	 * 
+	 * @return
+	 */
 	@Override
 	public int delete() {
 		LOGGER.info("Please enter the id of the item you would like to delete");
