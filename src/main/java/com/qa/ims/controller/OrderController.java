@@ -1,6 +1,7 @@
 package com.qa.ims.controller;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -37,8 +38,10 @@ public static final Logger LOGGER = LogManager.getLogger();
 	public Order create() {
 		LOGGER.info("Please enter a customer ID");
 		Long customer_id = utils.getLong();
+		
+		java.sql.Date order_date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
-		Date order_date = (Date) new java.util.Date();
+
 
 		Order order = orderDAO.create(new Order(customer_id, order_date));
 		
@@ -59,9 +62,11 @@ public static final Logger LOGGER = LogManager.getLogger();
 		double price = 0;
 		double total_cost = 0;
 		do {
-			LOGGER.info("Please enter an item id");
+			LOGGER.info("Please enter an item id, 0 to exit");
 			item_id = utils.getLong();
-			
+			if(item_id ==0) {
+				break;
+			}
 			LOGGER.info("Please enter a quantity");
 			int quantity = utils.getInt();
 			
