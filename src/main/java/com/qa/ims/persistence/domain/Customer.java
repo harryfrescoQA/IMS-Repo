@@ -1,45 +1,57 @@
 package com.qa.ims.persistence.domain;
 
 public class Customer {
+	
+	// -------------------
+	// Attributes
+	// -------------------
+		private Long id;
+		private String firstName;
+		private String surname;
 
-	private Long id;
-	private String firstName;
-	private String surname;
+	// ------------------------
+	// Constructor with no id
+	// ------------------------
+		public Customer(String firstName, String surname) {
+			this.firstName = firstName;
+			this.surname = surname;
+		}
 
-	public Customer(String firstName, String surname) {
-		this.firstName = firstName;
-		this.surname = surname;
-	}
-
-	public Customer(Long id, String firstName, String surname) {
-		this.id = id;
-		this.firstName = firstName;
-		this.surname = surname;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getSurname() {
-		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+	// ------------------------
+	// Constructor with ID
+	// ------------------------
+		public Customer(Long id, String firstName, String surname) {
+			this.id = id;
+			this.firstName = firstName;
+			this.surname = surname;
+		}
+		
+	// -----------------------
+	// Getters and Setters
+	// -----------------------
+		public Long getId() {
+			return id;
+		}
+		
+		public void setId(Long id) {
+			this.id = id;
+		}
+		
+		public String getFirstName() {
+			return firstName;
+		}
+		
+		public void setFirstName(String firstName) {
+			this.firstName = firstName;
+		}
+		
+		public String getSurname() {
+			return surname;
+		}
+		
+		public void setSurname(String surname) {
+			this.surname = surname;
+		}
 
 	@Override
 	public String toString() {

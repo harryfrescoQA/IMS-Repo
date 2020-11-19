@@ -19,6 +19,7 @@ public class Utils {
 		scanner = new Scanner(System.in);
 	}
 
+	// Uses the scanner to get a Long and returns it
 	public Long getLong() {
 		String input = getString();
 		Long longInput = null;
@@ -32,6 +33,7 @@ public class Utils {
 		return longInput;
 	}
 
+	// getInt function for the scanner to use.
 	public int getInt() {
 		String input = getString();
 		int intInput = 0;
@@ -45,10 +47,12 @@ public class Utils {
 		return intInput;
 	}
 	
+	// Uses the scanner to get a String and returns it
 	public String getString() {
 		return scanner.nextLine();
 	}
 
+	// Uses the scanner to get a Double and returns it
 	public Double getDouble() {
 		String input = getString();
 		Double doubleInput = null;
