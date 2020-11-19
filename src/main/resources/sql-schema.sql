@@ -25,9 +25,11 @@ CREATE TABLE IF NOT EXISTS `ims`.`items` (
 
 );
 CREATE TABLE IF NOT EXISTS `ims`.`orderline` (
+    `orderline_id` INT(11) NOT NULL AUTO_INCREMENT,
     `order_id` INT(11) NOT NULL,
     `item_id` INT(11) NOT NULL,
     `quantity_ordered` INT NOT NULL,
+    PRIMARY KEY (`orderline_id`),
     FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
     FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE
 );

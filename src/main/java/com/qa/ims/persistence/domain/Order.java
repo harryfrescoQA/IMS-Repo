@@ -1,6 +1,7 @@
 package com.qa.ims.persistence.domain;
 
 import java.sql.Date;
+import java.util.List;
 
 //import java.util.List;
 
@@ -11,14 +12,26 @@ public class Order {
 		private Long order_id;
 		private Long customer_id;
 		private Date order_date;
-		private double total_cost = 0;
-		//private List<Item> itemList;
+		private double total_cost = 0.00;
+		private List<OrderLine> orderLineList;
 		
-		public Order(Long customer_id, Date order_date, double total_cost) {
+		
+		public Order(Long order_id, Long customer_id, Date order_date, double total_cost,
+				List<OrderLine> orderLineList) {
+			super();
+			this.order_id = order_id;
+			this.customer_id = customer_id;
+			this.order_date = order_date;
+			this.total_cost = total_cost;
+			this.orderLineList = orderLineList;
+		}
+
+		public Order(Long customer_id, Date order_date, double total_cost, List<OrderLine> orderLineList) {
 			super();
 			this.customer_id = customer_id;
 			this.order_date = order_date;
 			this.total_cost = total_cost;
+			this.orderLineList = orderLineList;
 
 		}
 
@@ -77,17 +90,25 @@ public class Order {
 			this.total_cost = total_cost;
 		}
 
-//		public List<Item> getItemList() {
-//			return itemList;
-//		}
-//
-//		public void setItemList(List<Item> itemList) {
-//			this.itemList = itemList;
-//		}
+
+		public List<OrderLine> getOrderLineList() {
+			return orderLineList;
+		}
+
+		public void setOrderLineList(List<OrderLine> orderLineList) {
+			this.orderLineList = orderLineList;
+		}
+
 		//Long order_id, Long customer_id, Date order_date, double total_cost
 		@Override
 		public String toString() {
-			return "id:" + order_id + " customer_id: " + customer_id + " Date: " + order_date + " total_cost: "+ total_cost;
+			String out =  "Order_id:" + order_id + " customer_id: " + customer_id + " Date: " + order_date + " total_cost: "+ total_cost;
+			out += "\n \t Items: " + "\n";
+			for(OrderLine i : orderLineList) {
+				out += "\t" + i.toString() + "\n";
+				
+			}
+			return out;
 		}
 		
 	
