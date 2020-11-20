@@ -19,7 +19,9 @@ public class OrderController implements CrudController<Order> {
 
 public static final Logger LOGGER = LogManager.getLogger();
 	
+	// Attributes
 	private OrderDAO orderDAO;
+	// Requires an OrderLineDAO to control the orderline table at the same time
 	private OrderLineDAO orderLineDAO;
 	private Utils utils;
 	
@@ -30,6 +32,7 @@ public static final Logger LOGGER = LogManager.getLogger();
 		this.orderLineDAO = new OrderLineDAO();
 	}
 
+	// Read all orders
 	@Override
 	public List<Order> readAll() {
 		List<Order> orders = orderDAO.readAll();
@@ -39,15 +42,16 @@ public static final Logger LOGGER = LogManager.getLogger();
 		return orders;
 	}
 
+	// Create an empty order for a customer
 	@Override
 	public Order create() {
 		LOGGER.info("Please enter a customer ID");
 		Long customer_id = utils.getLong();
 		
+		// Creates an sql DATE for the current date
 		java.sql.Date order_date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
-
-
+		// Uses OrderDAO to create an order with customer ID and the date
 		Order order = orderDAO.create(new Order(customer_id, order_date));
 		
 		LOGGER.info("Item created");
@@ -57,6 +61,28 @@ public static final Logger LOGGER = LogManager.getLogger();
 	@Override
 	public Order update() {
 		
+		LOGGER.info("Do you want to ADD an item or DELETE?");
+		LOGGER.info("\t or RETURN");
+		String choice = utils.getString().toLowerCase();
+		
+		Order returnedOrder = null;
+
+			switch(choice) {
+			case "add":
+				returnedOrder = addToOrder();
+				break;
+			case "delete":
+				returnedOrder = deleteFromOrder();
+				break;
+			case "return":
+				break;
+			default:
+				LOGGER.info("Not an input. Try again");
+				break;
+			}
+		return returnedOrder;
+	}
+	public Order addToOrder() {
 		LOGGER.info("Please enter the id of the order you would like to update");
 		Long id = utils.getLong();
 
@@ -64,9 +90,16 @@ public static final Logger LOGGER = LogManager.getLogger();
 		double price = 0;
 		double total_cost = 0;
 		int quantity = 0;
-		ItemDAO itemDAO = new ItemDAO();
-		Order order = null;
-		OrderLine orderLine = null;
+		// Uses itemDAO to get the item objects to put in the orderline
+			ItemDAO itemDAO = new ItemDAO();
+		// get the current order details such as total cost.
+			Order order = orderDAO.readOrder(id);
+			total_cost = order.getTotal_cost();
+			
+			OrderLine orderLine = null;
+			
+		// Do-while loop to allow user to enter multiple items. 
+		// If 0 is entered the loop breaks.
 		do {
 			LOGGER.info("Please enter an item id, 0 to exit");
 			item_id = utils.getLong();
@@ -76,24 +109,83 @@ public static final Logger LOGGER = LogManager.getLogger();
 			LOGGER.info("Please enter a quantity");
 			quantity = utils.getInt();
 			
+			// If there is an item with the above ID, get it's price
 			if(itemDAO.readItemID(item_id) != null) {
-				price = itemDAO.readItemID(item_id).getPrice();
+				price = itemDAO.readItem(item_id).getPrice();
+				// Get the total cost
+				
 				total_cost += price * quantity;
+				//itemDAO.update(itemDAO.re)
 			}
+			// Create an order with the ID and total cost
 			order = new Order(id, total_cost);
+			// Create an orderline record with the item
 			 orderLine = orderLineDAO.create(new OrderLine(order.getOrder_id(), item_id, quantity));
 		}
+		// Repeat until 0 is entered
 		while(item_id!=0);
-		//Long order_id, Long customer_id, Date order_date, double total_cost
-		//OrderLineDAO orderLineDAO = new OrderLineDAO();
-
-		orderLine.toString();
+		
+		//orderLine.toString();
+		// Update the order
 		orderDAO.update(order);
 		
 		LOGGER.info("Order created");
 		return order;
 	}
+	
+	public Order deleteFromOrder() {
+		LOGGER.info("Please enter the id of the order you would like to edit: ");
+		Long id = utils.getLong();
 
+		Long item_id;
+		Item item = null;
+		double total_cost = 0;
+		// Uses itemDAO to get the item objects to remove from orderline
+			ItemDAO itemDAO = new ItemDAO();
+		// get the current order details such as total cost.
+			Order order = orderDAO.readOrder(id);
+			total_cost = order.getTotal_cost();
+			
+			OrderLine orderLine = null;
+			
+		// Do-while loop to allow user to enter multiple items. 
+		// If 0 is entered the loop breaks.
+		do {
+			LOGGER.info("Please enter an item id, 0 to exit");
+			item_id = utils.getLong();
+			if(item_id ==0) {
+				break;
+			}
+
+			
+			// If there is an item with the above ID, get it's price
+			if(itemDAO.readItemID(item_id) != null) {
+				// Get the total cost
+				
+				total_cost -= order.getTotal_cost();
+				
+				item = itemDAO.readItemID(item_id);
+
+				orderLine = orderLineDAO.readOrderLineByOrder(item.getItem_id(), id);
+				orderLineDAO.delete(orderLine.getOrderline_id());
+			}
+			else {
+				LOGGER.info("Item doesn't exist");
+			}
+			// Create an order with the ID and total cost
+			order = new Order(id, total_cost);
+			// Create an orderline record with the item
+		}
+		// Repeat until 0 is entered
+		while(item_id!=0);
+		
+		//orderLine.toString();
+		// Update the order
+		orderDAO.update(order);
+		
+		LOGGER.info("Order created");
+		return order;
+	}
 	@Override
 	public int delete() {
 		LOGGER.info("Please enter the id of the order you would like to delete");

@@ -11,6 +11,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.persistence.domain.OrderLine;
 import com.qa.ims.utils.DBUtils;
 
@@ -73,6 +74,21 @@ public class OrderLineDAO implements Dao<OrderLine>{
 		}
 		return null;
 	}
+	
+	public OrderLine readOrderLineByOrder(Long item_id, Long order_id) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM orderline where order_id = " + order_id + 
+						" AND item_id = "+ item_id);) {
+			while(resultSet.next()) {
+			return modelFromResultSet(resultSet);
+			}
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return null;
+	}
 	// Long orderline_id, Long order_id, Long item_id, int quantity
 	@Override
 	public OrderLine update(OrderLine t) {
@@ -111,6 +127,8 @@ public class OrderLineDAO implements Dao<OrderLine>{
 		//System.out.println("Found " + test.getOrder_id());
 		return test;
 	}
+	
+	
 	public List<OrderLine> readAllID(Long id) {
 
 		try (Connection connection = DBUtils.getInstance().getConnection();
