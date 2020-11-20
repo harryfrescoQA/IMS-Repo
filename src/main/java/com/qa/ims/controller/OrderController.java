@@ -53,7 +53,7 @@ public static final Logger LOGGER = LogManager.getLogger();
 
 		// Uses OrderDAO to create an order with customer ID and the date
 		Order order = orderDAO.create(new Order(customer_id, order_date));
-		
+		addToOrder(orderDAO.readOrder(order.getOrder_id()).getOrder_id());
 		LOGGER.info("Item created");
 		return order;
 	}
@@ -69,10 +69,14 @@ public static final Logger LOGGER = LogManager.getLogger();
 
 			switch(choice) {
 			case "add":
-				returnedOrder = addToOrder();
+				LOGGER.info("Please enter the id of the order you would like to update");
+				Long id = utils.getLong();
+
+				returnedOrder = addToOrder(id);
 				break;
 			case "delete":
 				returnedOrder = deleteFromOrder();
+				LOGGER.info("Order deleted");
 				break;
 			case "return":
 				break;
@@ -82,9 +86,7 @@ public static final Logger LOGGER = LogManager.getLogger();
 			}
 		return returnedOrder;
 	}
-	public Order addToOrder() {
-		LOGGER.info("Please enter the id of the order you would like to update");
-		Long id = utils.getLong();
+	public Order addToOrder(Long id) {
 
 		Long item_id;
 		double price = 0;
@@ -183,7 +185,7 @@ public static final Logger LOGGER = LogManager.getLogger();
 		// Update the order
 		orderDAO.update(order);
 		
-		LOGGER.info("Order created");
+		LOGGER.info("Order updated");
 		return order;
 	}
 	@Override
