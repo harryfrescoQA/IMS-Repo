@@ -49,6 +49,7 @@ public class ItemController implements CrudController<Item>  {
 		int quantity = utils.getInt();
 		LOGGER.info("Please enter a price");
 		double price = utils.getDouble();
+		// Creates item object and use DAO to create
 		Item item = itemDAO.create(new Item(item_title, quantity, price));
 		LOGGER.info("Item created");
 		return item;
@@ -68,6 +69,7 @@ public class ItemController implements CrudController<Item>  {
 		int quantity = utils.getInt();
 		LOGGER.info("Please enter a price");
 		double price = utils.getDouble();
+		// Create item object and use DAO to update
 		Item item = itemDAO.update(new Item(id, item_title, quantity, price));
 		LOGGER.info("Item created");
 		return item;
@@ -82,6 +84,7 @@ public class ItemController implements CrudController<Item>  {
 	public int delete() {
 		LOGGER.info("Please enter the id of the item you would like to delete");
 		Long id = utils.getLong();
+		// Uses dao to delete item from system
 		return itemDAO.delete(id);
 	}
 

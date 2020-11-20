@@ -1,6 +1,5 @@
 package com.qa.ims.controller;
 
-import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public static final Logger LOGGER = LogManager.getLogger();
 		this.orderLineDAO = new OrderLineDAO();
 	}
 
-	// Read all orders
+	// Read all orders by using the toString method
 	@Override
 	public List<Order> readAll() {
 		List<Order> orders = orderDAO.readAll();
@@ -51,30 +50,36 @@ public static final Logger LOGGER = LogManager.getLogger();
 		// Creates an sql DATE for the current date
 		java.sql.Date order_date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
-		// Uses OrderDAO to create an order with customer ID and the date
+		// Uses OrderDAO to create an empty order with customer ID and the date
 		Order order = orderDAO.create(new Order(customer_id, order_date));
+		
+		// Calls the 'addToOrder' method with the recently created ID to add items to empty order
 		addToOrder(orderDAO.readOrder(order.getOrder_id()).getOrder_id());
 		LOGGER.info("Item created");
 		return order;
 	}
 
+	// Updates an order by asking for items to add or delete
 	@Override
 	public Order update() {
 		
 		LOGGER.info("Do you want to ADD an item or DELETE?");
 		LOGGER.info("\t or RETURN");
+		// Ask the user if they want to add or delete items from order
 		String choice = utils.getString().toLowerCase();
 		
 		Order returnedOrder = null;
 
 			switch(choice) {
 			case "add":
+				// If 'add' they enter the ID of the order to edit
 				LOGGER.info("Please enter the id of the order you would like to update");
 				Long id = utils.getLong();
-
+				// Call addToOrder function with an ID as used in create
 				returnedOrder = addToOrder(id);
 				break;
 			case "delete":
+				// If 'delete' the deleteFromOrder function is called.
 				returnedOrder = deleteFromOrder();
 				LOGGER.info("Order deleted");
 				break;
@@ -94,11 +99,9 @@ public static final Logger LOGGER = LogManager.getLogger();
 		int quantity = 0;
 		// Uses itemDAO to get the item objects to put in the orderline
 			ItemDAO itemDAO = new ItemDAO();
-		// get the current order details such as total cost.
+		// get the current order details
 			Order order = orderDAO.readOrder(id);
 			total_cost = order.getTotal_cost();
-			
-			OrderLine orderLine = null;
 			
 		// Do-while loop to allow user to enter multiple items. 
 		// If 0 is entered the loop breaks.
@@ -122,12 +125,11 @@ public static final Logger LOGGER = LogManager.getLogger();
 			// Create an order with the ID and total cost
 			order = new Order(id, total_cost);
 			// Create an orderline record with the item
-			 orderLine = orderLineDAO.create(new OrderLine(order.getOrder_id(), item_id, quantity));
+			 orderLineDAO.create(new OrderLine(order.getOrder_id(), item_id, quantity));
 		}
 		// Repeat until 0 is entered
 		while(item_id!=0);
-		
-		//orderLine.toString();
+
 		// Update the order
 		orderDAO.update(order);
 		
@@ -181,7 +183,6 @@ public static final Logger LOGGER = LogManager.getLogger();
 		// Repeat until 0 is entered
 		while(item_id!=0);
 		
-		//orderLine.toString();
 		// Update the order
 		orderDAO.update(order);
 		

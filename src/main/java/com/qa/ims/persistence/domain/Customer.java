@@ -55,7 +55,9 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "id:" + id + " first name:" + firstName + " surname:" + surname;
+
+		String output = "\n "+ id + "\t " + firstName + "\t \t " + surname;
+		return output;
 	}
 
 	@Override

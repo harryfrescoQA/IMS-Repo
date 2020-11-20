@@ -58,7 +58,7 @@ public class OrderLine {
 
 			@Override
 			public String toString() {
-				String out = "Item ID " + item_id.toString() + "  Qty: " +quantity;
+				String out = "Item ID: " + item_id.toString() + "  Qty: " +quantity;
 				return out;
 			}
 			

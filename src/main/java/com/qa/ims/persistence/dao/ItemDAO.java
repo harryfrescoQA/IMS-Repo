@@ -37,6 +37,7 @@ public class ItemDAO implements Dao<Item>  {
 		return new ArrayList<>();
 	}
 
+	// Return an Item by an entered ID
 	public Item readItemID(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
@@ -53,7 +54,7 @@ public class ItemDAO implements Dao<Item>  {
 		return null;
 	}
 
-	
+	// Read the last item to be added
 	public Item readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
@@ -76,7 +77,6 @@ public class ItemDAO implements Dao<Item>  {
 	public Item create(Item t) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
-			//INSERT INTO `ims`.`items` (`item_title`, `quantity`, `price`) VALUES ('Fender Stratocaster - White', '100', '699.99');
 			statement.executeUpdate("INSERT INTO items(item_title, quantity, price) values('" + t.getItem_title()
 					+ "','" + t.getQuantity() + "','" +t.getPrice()+ "')");
 			return readLatest();
@@ -138,7 +138,6 @@ public class ItemDAO implements Dao<Item>  {
 		return 0;
 	}
 
-	//INSERT INTO `ims`.`items` (`item_title`, `quantity`, `price`) VALUES ('Fender Stratocaster - White', '100', '699.99');
 	@Override
 	public Item modelFromResultSet(ResultSet resultSet) throws SQLException {
 		Long id = resultSet.getLong("item_id");

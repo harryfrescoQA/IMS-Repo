@@ -10,13 +10,13 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.persistence.domain.OrderLine;
 import com.qa.ims.utils.DBUtils;
 
 public class OrderLineDAO implements Dao<OrderLine>{
 	public static final Logger LOGGER = LogManager.getLogger();
+	
+	// Returns all orderlines in the db
 	@Override
 	public List<OrderLine> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -35,6 +35,7 @@ public class OrderLineDAO implements Dao<OrderLine>{
 		return new ArrayList<>();
 	}
 
+	// Returns the latest orderline in db
 	public OrderLine readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
@@ -48,6 +49,8 @@ public class OrderLineDAO implements Dao<OrderLine>{
 		}
 		return null;
 	}
+	
+	// Creates an order line
 	@Override
 	public OrderLine create(OrderLine t) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -62,6 +65,8 @@ public class OrderLineDAO implements Dao<OrderLine>{
 		}
 		return null;
 	}
+	
+	// Returns ONE orderline by its id
 	public OrderLine readOrderLine(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
@@ -75,6 +80,8 @@ public class OrderLineDAO implements Dao<OrderLine>{
 		return null;
 	}
 	
+	// Returns ONE orderline by it's item_id AND order_id
+	// Used for when orderline_id cannot be known
 	public OrderLine readOrderLineByOrder(Long item_id, Long order_id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
@@ -89,7 +96,8 @@ public class OrderLineDAO implements Dao<OrderLine>{
 		}
 		return null;
 	}
-	// Long orderline_id, Long order_id, Long item_id, int quantity
+	
+	// Updates OrderLine
 	@Override
 	public OrderLine update(OrderLine t) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -104,6 +112,7 @@ public class OrderLineDAO implements Dao<OrderLine>{
 		return null;
 	}
 
+	// Deletes orderLine
 	@Override
 	public int delete(long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -128,7 +137,7 @@ public class OrderLineDAO implements Dao<OrderLine>{
 		return test;
 	}
 	
-	
+	// Returns List of orderlines in one order
 	public List<OrderLine> readAllID(Long id) {
 
 		try (Connection connection = DBUtils.getInstance().getConnection();

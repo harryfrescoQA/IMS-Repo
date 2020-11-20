@@ -18,29 +18,30 @@ import com.qa.ims.utils.DBUtils;
 
 public class OrderDAO implements Dao<Order> {
 	public static final Logger LOGGER = LogManager.getLogger();
+	//List to hold the orderLines for an order
 	List<OrderLine> orderlines = new ArrayList<>();
+	
+	// Returns all orders in a list
 	@Override
 	public List<Order> readAll() {
 		
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				Statement statement = connection.createStatement();
-				//SELECT *  FROM orders JOIN orderline ON orders.order_id = orderline.order_id;
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders");) {
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM orders");) {
 			List<Order> orders = new ArrayList<>();
 			
+			// For each order, use orderLineDAO to get the orderLines for that record and store in a list.
+			// Each order has a list of OrderLines
 			while (resultSet.next()) {
 				
 				Long id = resultSet.getLong("order_id");
-
+				
+				// New OrderLineDAO to read orderlines
 				OrderLineDAO dao = new OrderLineDAO();
-				
-				//orderlines.clear();
+
 				orderlines = (dao.readAllID(id));
-					
-				
-				
+
 				orders.add(modelFromResultSet(resultSet));
-				
 			}
 			return orders;
 		} catch (SQLException e) {
@@ -50,7 +51,7 @@ public class OrderDAO implements Dao<Order> {
 		return new ArrayList<>();
 	}
 
-
+	// Returns the latest order
 	public Order readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
@@ -63,6 +64,8 @@ public class OrderDAO implements Dao<Order> {
 		}
 		return null;
 	}
+	
+	// Creates an order
 	@Override
 	public Order create(Order t) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -78,6 +81,7 @@ public class OrderDAO implements Dao<Order> {
 		return null;
 	}
 
+	// Returns ONE order from an ID
 	public Order readOrder(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
@@ -92,6 +96,8 @@ public class OrderDAO implements Dao<Order> {
 		}
 		return null;
 	}
+	
+	// Updates an existing order based on ID
 	@Override
 	public Order update(Order t) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -105,6 +111,7 @@ public class OrderDAO implements Dao<Order> {
 		return null;
 	}
 
+	// Deletes an order
 	@Override
 	public int delete(long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
