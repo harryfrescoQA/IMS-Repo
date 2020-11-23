@@ -17,6 +17,7 @@ public class OrderLineDAO implements Dao<OrderLine>{
 	public static final Logger LOGGER = LogManager.getLogger();
 	
 	// Returns all orderlines in the db
+	// Not used
 	@Override
 	public List<OrderLine> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -67,18 +68,18 @@ public class OrderLineDAO implements Dao<OrderLine>{
 	}
 	
 	// Returns ONE orderline by its id
-	public OrderLine readOrderLine(Long id) {
-		try (Connection connection = DBUtils.getInstance().getConnection();
-				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orderline where orderline_id = " + id);) {
-			resultSet.next();
-			return modelFromResultSet(resultSet);
-		} catch (Exception e) {
-			LOGGER.debug(e);
-			LOGGER.error(e.getMessage());
-		}
-		return null;
-	}
+//	public OrderLine readOrderLine(Long id) {
+//		try (Connection connection = DBUtils.getInstance().getConnection();
+//				Statement statement = connection.createStatement();
+//				ResultSet resultSet = statement.executeQuery("SELECT * FROM orderline where orderline_id = " + id);) {
+//			resultSet.next();
+//			return modelFromResultSet(resultSet);
+//		} catch (Exception e) {
+//			LOGGER.debug(e);
+//			LOGGER.error(e.getMessage());
+//		}
+//		return null;
+//	}
 	
 	// Returns ONE orderline by it's item_id AND order_id
 	// Used for when orderline_id cannot be known
@@ -98,17 +99,19 @@ public class OrderLineDAO implements Dao<OrderLine>{
 	}
 	
 	// Updates OrderLine
+	// Not used
 	@Override
 	public OrderLine update(OrderLine t) {
-		try (Connection connection = DBUtils.getInstance().getConnection();
-				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update orderline set order_id ='" + t.getOrder_id()+"', item_id = '" + t.getItem_id() + "', quantity_ordered = '" +
-				 t.getQuantity() + "' where orderline_id = " + t.getOrderline_id());
-			return readOrderLine(t.getOrderline_id());
-		} catch (Exception e) {
-			LOGGER.debug(e);
-			LOGGER.error(e.getMessage());
-		}
+//		try (Connection connection = DBUtils.getInstance().getConnection();
+//				Statement statement = connection.createStatement();) {
+//			statement.executeUpdate("update orderline set order_id ='" + t.getOrder_id()+"', item_id = '" + t.getItem_id() + "', quantity_ordered = '" +
+//				 t.getQuantity() + "' where orderline_id = " + t.getOrderline_id());
+//			return null;
+//			//return readOrderLine(t.getOrderline_id());
+//		} catch (Exception e) {
+//			LOGGER.debug(e);
+//			LOGGER.error(e.getMessage());
+//		}
 		return null;
 	}
 

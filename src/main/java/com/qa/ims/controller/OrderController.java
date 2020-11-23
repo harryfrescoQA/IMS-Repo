@@ -115,7 +115,7 @@ public static final Logger LOGGER = LogManager.getLogger();
 			quantity = utils.getInt();
 			
 			// If there is an item with the above ID, get it's price
-			if(itemDAO.readItemID(item_id) != null) {
+			if(itemDAO.readItem(item_id) != null) {
 				price = itemDAO.readItem(item_id).getPrice();
 				// Get the total cost
 				
@@ -163,12 +163,12 @@ public static final Logger LOGGER = LogManager.getLogger();
 
 			
 			// If there is an item with the above ID, get it's price
-			if(itemDAO.readItemID(item_id) != null) {
+			if(itemDAO.readItem(item_id) != null) {
 				// Get the total cost
 				
 				total_cost -= order.getTotal_cost();
 				
-				item = itemDAO.readItemID(item_id);
+				item = itemDAO.readItem(item_id);
 
 				orderLine = orderLineDAO.readOrderLineByOrder(item.getItem_id(), id);
 				orderLineDAO.delete(orderLine.getOrderline_id());

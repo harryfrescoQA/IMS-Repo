@@ -64,4 +64,36 @@ public class Item {
 	public String toString() {
 		return "id:" + item_id + " item_title: " + item_title + " quantity: " + quantity + " price: "+ price;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (item_title == null) {
+			if (other.item_title != null)
+				return false;
+		} else if (!item_title.equals(other.item_title))
+			return false;
+		if (item_id == null) {
+			if (other.item_id != null)
+				return false;
+		} else if (!item_id.equals(other.item_id))
+			return false;
+		if (quantity == 0) {
+			if (other.quantity != 0)
+				return false;
+		} else if (!(quantity == other.quantity))
+			return false;
+		if (price == 0) {
+			if (other.price != 0)
+				return false;
+		} else if (!(price == other.price))
+			return false;
+		return true;
+	}
 }

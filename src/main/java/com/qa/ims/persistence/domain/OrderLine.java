@@ -9,6 +9,7 @@ public class OrderLine {
 			private Long order_id;
 			private Long item_id;
 			private int quantity;
+			
 			public OrderLine(Long order_id, Long item_id, int quantity) {
 				super();
 				this.order_id = order_id;
@@ -62,6 +63,36 @@ public class OrderLine {
 				return out;
 			}
 			
-			
+			@Override
+			public boolean equals(Object obj) {
+				if (this == obj)
+					return true;
+				if (obj == null)
+					return false;
+				if (getClass() != obj.getClass())
+					return false;
+				OrderLine other = (OrderLine) obj;
+				if (orderline_id == null) {
+					if (other.orderline_id != null)
+						return false;
+				} else if (!orderline_id.equals(other.orderline_id))
+					return false;
+				if (order_id == null) {
+					if (other.order_id != null)
+						return false;
+				} else if (!order_id.equals(other.order_id))
+					return false;
+				if (item_id == null) {
+					if (other.item_id != null)
+						return false;
+				} else if (!(item_id == other.item_id))
+					return false;
+				if (quantity == 0) {
+					if (other.quantity != 0)
+						return false;
+				} else if (!(quantity == other.quantity))
+					return false;
+				return true;
+			}
 
 }

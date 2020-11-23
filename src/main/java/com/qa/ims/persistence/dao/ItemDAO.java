@@ -37,23 +37,6 @@ public class ItemDAO implements Dao<Item>  {
 		return new ArrayList<>();
 	}
 
-	// Return an Item by an entered ID
-	public Item readItemID(Long id) {
-		try (Connection connection = DBUtils.getInstance().getConnection();
-				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("select * from items WHERE item_id = " + id);) {
-			Item item = null;
-			while (resultSet.next()) {
-				item = modelFromResultSet(resultSet);
-			}
-			return item;
-		} catch (SQLException e) {
-			LOGGER.debug(e);
-			LOGGER.error(e.getMessage());
-		}
-		return null;
-	}
-
 	// Read the last item to be added
 	public Item readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();

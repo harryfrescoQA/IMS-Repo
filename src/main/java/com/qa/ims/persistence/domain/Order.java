@@ -112,8 +112,43 @@ public class Order {
 				
 			}
 			return out;
-		}
-		
-	
+		} 
+		 
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Order other = (Order) obj;
+			if (order_id == null) {
+				if (other.order_id != null)
+					return false;
+			} else if (!(order_id == other.order_id))
+				return false;
+			if (customer_id == null) {
+				if (other.customer_id != null)
+					return false;
+			} else if (!customer_id.equals(other.customer_id))
+				return false;
+			if (order_date == null) {
+				if (other.order_date != null)
+					return false;
+			} else if (!(order_date.equals(other.order_date)))
+				return false;
+			if (total_cost == 0) {
+				if (other.total_cost != 0)
+					return false;
+			} else if (!(total_cost == other.total_cost))
+				return false;
+			if (orderLineList == null) {
+				if (other.orderLineList != null)
+					return false;
+			} else if (!(orderLineList.equals(other.orderLineList)))
+				return false;
+			return true;
+		} 
 	
 }
