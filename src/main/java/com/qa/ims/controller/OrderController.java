@@ -40,7 +40,7 @@ public static final Logger LOGGER = LogManager.getLogger();
 		}
 		return orders;
 	}
-
+ 
 	// Create an empty order for a customer
 	@Override
 	public Order create() {
@@ -57,8 +57,8 @@ public static final Logger LOGGER = LogManager.getLogger();
 		addToOrder(orderDAO.readOrder(order.getOrder_id()).getOrder_id());
 		LOGGER.info("Item created");
 		return order;
-	}
-
+	} 
+ 
 	// Updates an order by asking for items to add or delete
 	@Override
 	public Order update() {
@@ -161,7 +161,7 @@ public static final Logger LOGGER = LogManager.getLogger();
 				break;
 			}
 
-			
+			 
 			// If there is an item with the above ID, get it's price
 			if(itemDAO.readItem(item_id) != null) {
 				// Get the total cost
