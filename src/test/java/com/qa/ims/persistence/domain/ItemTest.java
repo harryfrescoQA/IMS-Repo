@@ -45,5 +45,45 @@ public class ItemTest {
 		assertEquals("Test Title", item.getItem_title());
 	}
 	
+	@Test
+	public void getQuantityTest() {
+		Item item = new Item(1l, "Title", 1, 5.00);
+		assertEquals(1, item.getQuantity());
+	}
 	
+	@Test
+	public void setQuantityTest() {
+		Item item = new Item("Title", 1, 5.00);
+		item.setQuantity(2);
+		assertEquals(2, item.getQuantity());
+	}
+	
+	@Test
+	public void getPriceTest() {
+		Item item = new Item("Title", 1, 5.00);
+		assertEquals(Double.valueOf(5.00), Double.valueOf(item.getPrice()));
+	}
+	
+	@Test
+	public void setPriceTest() {
+		Item item = new Item("Title", 1, 5.00);
+		item.setPrice(2.00);
+		assertEquals(Double.valueOf(2.00), Double.valueOf(item.getPrice()));
+	}
+	
+	@Test
+	public void toStringTest() {
+		Item item = new Item(1l, "Title", 1, 5.00);
+		String output = item.toString();
+		String expected = "id: " + 1l + " item_title: " + "Title" + " quantity: " + 1 + " price: "+ 5.00;
+		assertEquals(expected, output);
+	}
+	
+	@Test
+	public void equalsTest() {
+		Item item = new Item(1l, "Title", 1, 5.00);
+		Item item2 = new Item(1l, "Title", 1, 5.00);
+		
+		assertEquals(true, item.equals(item2));
+	}
 }

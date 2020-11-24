@@ -21,10 +21,11 @@ public class Utils {
 
 	// Uses the scanner to get a Long and returns it
 	public Long getLong() {
-		String input = getString();
+
 		Long longInput = null;
 		do {
-			try {
+			try {		
+				String input = getString();
 				longInput = Long.parseLong(input);
 			} catch (NumberFormatException nfe) {
 				LOGGER.info("Error - Please enter a number");
@@ -35,10 +36,11 @@ public class Utils {
 
 	// getInt function for the scanner to use.
 	public int getInt() {
-		String input = getString();
+
 		int intInput = 0;
 		do {
-			try {
+			try {		
+				String input = getString();
 				intInput = Integer.parseInt(input);
 			} catch (NumberFormatException nfe) {
 				LOGGER.info("Error - Please enter a number");
@@ -54,10 +56,11 @@ public class Utils {
 
 	// Uses the scanner to get a Double and returns it
 	public Double getDouble() {
-		String input = getString();
+		
 		Double doubleInput = null;
 		do {
 			try {
+				String input = getString();
 				doubleInput = Double.parseDouble(input);
 			} catch (NumberFormatException nfe) {
 				LOGGER.info("Error - Please enter a number");

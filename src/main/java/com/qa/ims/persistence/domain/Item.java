@@ -62,7 +62,7 @@ public class Item {
 	//Long item_id, String item_title, int quantity, double price
 	@Override
 	public String toString() {
-		return "id:" + item_id + " item_title: " + item_title + " quantity: " + quantity + " price: "+ price;
+		return "id: " + item_id + " item_title: " + item_title + " quantity: " + quantity + " price: "+ price;
 	}
 	
 	@Override
