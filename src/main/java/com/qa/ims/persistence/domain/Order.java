@@ -12,7 +12,7 @@ public class Order {
 		private Long order_id;
 		private Long customer_id;
 		private Date order_date;
-		private double total_cost = 0.00;
+		private double total_cost = 0.00; 
 		// Has a list of orderLines which contain the items in the order
 		private List<OrderLine> orderLineList;
 		

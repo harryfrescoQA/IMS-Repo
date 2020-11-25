@@ -1,7 +1,7 @@
 Coverage: 34%
-# Project Title
+# QA IMS Java Project
 
-One Paragraph of project description goes here
+This Inventory Management System uses a command-line interface to allow a user to perform CRUD operations on a variety of objects. These objects are Customer, Item and Order. A customer can have many orders, Orders can have many items. A MySQL Server database is used to hold the schema and it's data.
 
 ## Getting Started
 
@@ -12,26 +12,85 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them
 
 ```
-Give examples
+Install: Eclipse IDE for Java
+
+Install: Java Development Kit 14
+
+Install: Maven
+
+Install: MySQL Server (for localhost running/testing) and MySQL Workbench
+
 ```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+Once this repo has been downloaded or cloned, open the project in Eclipse:
 
 ```
-Give the example
+File -> Import -> Select Maven/Existing Maven Projects -> Browse to the folder and click Finish
+```
+Ensure that a localhost MySQL is set-up on your computer by opening MySQL Workbench, and under MySQL Connections is 
+
+```
+root
+localhost:3306
 ```
 
-And repeat
+Right click Runner.Java -> Run With... -> Java Application
+
+Username:
+```
+root
+```
+
+Password:
+```
+root
+```
+The domain menu is then shown. This is where you can select the entities and then perform CRUD operations.
+
+### Example with Customer
 
 ```
-until finished
+Which entity would you like to use?
+CUSTOMER: Information about customers
+ITEM: Individual Items
+ORDER: Purchases of items
+STOP: To close the application
+```
+Type:
+```
+customer
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+then:
+```
+read
+```
+You will see:
+```
+ID       First Name:     Surname:
+------------------------------------
+
+ 1       Jordan          Harrison
+```
+To create a customer type:
+```
+create
+```
+then enter the name of the customer you would like to create. To read it after creation simply type
+```
+read
+```
+and you will see:
+```
+ID       First Name:     Surname:
+------------------------------------
+
+ 1       Jordan          Harrison
+
+ 2       f               d
+```
 
 ## Running the tests
 
@@ -46,6 +105,7 @@ Give an example
 ```
 
 ### Integration Tests 
+
 Explain what these tests test, why and how to run them
 
 ```

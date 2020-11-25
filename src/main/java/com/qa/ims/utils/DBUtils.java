@@ -20,7 +20,11 @@ public class DBUtils {
 	private final String DB_PASS;
 
 	// URL for the GCP instance 'ims'
-	private final String DB_URL = "jdbc:mysql://34.121.14.96/ims?db_name&serverTimezone=UTC";
+	//private final String DB_URL = "jdbc:mysql://34.121.14.96/ims?db_name&serverTimezone=UTC";
+	// Url for local
+	private final String DB_URL = "jdbc:mysql://localhost:3306/ims?db_name&serverTimezone=UTC";
+
+	
 
 	private DBUtils(String username, String password) {
 		this.DB_USER = username;
