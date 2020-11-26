@@ -134,7 +134,7 @@ These tests use Mockito to test the controllers that connect the User to the DAO
 To run all of the tests, make sure that a MySQL server is running as either a localhost or GCP instance.
 In the Package Explorer, right-click on the _src/test/java_ folder then Run As, then JUnit Test.
 
-It may take a while to complete all tests.
+It usually take 5 minutes to complete all tests.
 
 
 ## Deployment

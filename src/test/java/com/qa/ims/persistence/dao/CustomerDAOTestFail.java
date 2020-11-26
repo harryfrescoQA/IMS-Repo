@@ -22,7 +22,7 @@ public class CustomerDAOTestFail {
 
 	@Before
 	public void setup() {
-		DBUtils.getInstance().init("src/test/resources/sql-schema.sql", "src/test/resources/sql-data-test.sql");
+		DBUtils.getInstance().init("src/test/resources/sql-schema.sql", "src/test/resources/sql-data.sql");
 	}
 
 	@Test

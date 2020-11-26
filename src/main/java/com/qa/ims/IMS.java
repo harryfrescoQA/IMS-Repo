@@ -43,7 +43,8 @@ public class IMS {
 		DBUtils.connect(username, password);
 		Domain domain = null;
 		do {
-			LOGGER.info("Which entity would you like to use?");
+			LOGGER.info("\nWhich entity would you like to use?\n");
+			LOGGER.info("--------------------------------------\n\n");
 			Domain.printDomains();
 
 			domain = Domain.getDomain(utils);
@@ -67,8 +68,8 @@ public class IMS {
 					break;
 				}
 
-				LOGGER.info("What would you like to do with " + domain.name().toLowerCase() + ":");
-
+				LOGGER.info("\nWhat would you like to do with " + domain.name().toLowerCase() + ":");
+				LOGGER.info("\n-----------------------------------------------\n\n");
 				Action.printActions();
 				Action action = Action.getAction(utils);
 

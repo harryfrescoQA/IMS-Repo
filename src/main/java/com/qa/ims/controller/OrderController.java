@@ -116,11 +116,24 @@ public static final Logger LOGGER = LogManager.getLogger();
 			
 			// If there is an item with the above ID, get it's price
 			if(itemDAO.readItem(item_id) != null) {
-				price = itemDAO.readItem(item_id).getPrice();
-				// Get the total cost
 				
-				total_cost += price * quantity;
-				//itemDAO.update(itemDAO.re)
+				
+				Item itemUpdateQty = itemDAO.readItem(item_id);
+				int currentQty = itemUpdateQty.getQuantity();
+				
+				if(quantity <= currentQty) {
+					price = itemDAO.readItem(item_id).getPrice();
+					// Get the total cost
+					
+					total_cost += price * quantity;
+					
+					itemUpdateQty.setQuantity(currentQty - quantity);
+					itemDAO.update(itemUpdateQty);
+				}
+				else {
+					LOGGER.info("Not enough in stock");
+					break;
+				}
 			}
 			// Create an order with the ID and total cost
 			order = new Order(id, total_cost);

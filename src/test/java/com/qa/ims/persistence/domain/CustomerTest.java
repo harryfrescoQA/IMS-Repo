@@ -62,7 +62,7 @@ public class CustomerTest {
 	public void toStringTest() {
 		Customer cust = new Customer(1l, "Test", "Testy");
 		String output = cust.toString();
-		String expected = "\n " + 1 + "\t " + "Test" + "\t \t " + "Testy";
+		String expected = "\n\n " + 1 + "\t " + "Test" + "\t \t " + "Testy";
 		assertEquals(expected, output);
 		}
 	

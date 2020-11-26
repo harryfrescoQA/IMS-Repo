@@ -56,7 +56,7 @@ public class Customer {
 	@Override
 	public String toString() {
 
-		String output = "\n "+ id + "\t " + firstName + "\t \t " + surname;
+		String output = "\n\n "+ id + "\t " + firstName + "\t \t " + surname;
 		return output;
 	}
 
