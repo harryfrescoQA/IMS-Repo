@@ -156,13 +156,14 @@ public static final Logger LOGGER = LogManager.getLogger();
 
 		Long item_id;
 		Item item = null;
+		double price = 0;
 		double total_cost = 0;
 		// Uses itemDAO to get the item objects to remove from orderline
 			ItemDAO itemDAO = new ItemDAO();
 		// get the current order details such as total cost.
 			Order order = orderDAO.readOrder(id);
 			total_cost = order.getTotal_cost();
-			
+			int quantity = 0;
 			OrderLine orderLine = null;
 			
 		// Do-while loop to allow user to enter multiple items. 
@@ -178,12 +179,15 @@ public static final Logger LOGGER = LogManager.getLogger();
 			// If there is an item with the above ID, get it's price
 			if(itemDAO.readItem(item_id) != null) {
 				// Get the total cost
+				price = itemDAO.readItem(item_id).getPrice();
 				
-				total_cost -= order.getTotal_cost();
+				
+				//total_cost -= order.getTotal_cost();
 				
 				item = itemDAO.readItem(item_id);
-
+				
 				orderLine = orderLineDAO.readOrderLineByOrder(item.getItem_id(), id);
+				total_cost -= price * orderLine.getQuantity();
 				orderLineDAO.delete(orderLine.getOrderline_id());
 			}
 			else {

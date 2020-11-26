@@ -1,4 +1,3 @@
-Coverage: 34%
 # QA IMS Java Project
 
 This Inventory Management System uses a command-line interface to allow a user to perform CRUD operations on a variety of objects. These objects are Customer, Item and Order. A customer can have many orders, Orders can have many items. A MySQL Server database is used to hold the schema and it's data.
