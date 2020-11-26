@@ -108,9 +108,9 @@ src/test/java -> com.qa.ims
 ```
 
 The test suites are: 
-*Controllers
-*DAO
-*Domain
+-Controllers
+-DAO
+-Domain
 
 Each test suite has a corresponding test suite that tests if the program has failed correctly. An example of this is:
 
@@ -139,8 +139,9 @@ It may take a while to complete all tests.
 
 ## Deployment
 
-To run the .jar file from the command-line, navigate to the directory that holds the _ims-0.0.1-jar-with-dependencies.jar_ file and execute the following command once you have ensured that a MySQL localhost Server is running on your machine:
+To run the .jar file from the command-line, navigate to the directory that holds the _ims-x.x.x-jar-with-dependencies.jar_ file and execute the following command once you have ensured that a MySQL localhost Server is running on your machine:
 
+Example:
 ```
 java -jar ims-0.0.1-jar-with-dependencies.jar
 ```
