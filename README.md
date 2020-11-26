@@ -18,7 +18,11 @@ Install: Java Development Kit 14
 
 Install: Maven
 
-Install: MySQL Server (for localhost running/testing) and MySQL Workbench
+Install: MySQL Server (for localhost running/testing) and MySQL Workbench 
+
+OR
+
+Run a MySQL Server on a GCP instance
 
 ```
 
@@ -93,36 +97,64 @@ ID       First Name:     Surname:
 ```
 
 ## Running the tests
-
-Explain how to run the automated tests for this system. Break down into which tests and what they do
+In this project, I have included JUnit tests to ensure that the code is working to specifications by running these tests and making sure that they all pass. **The coverage of the entire project is 88.3%.**
 
 ### Unit Tests 
 
-Explain what these tests test, why and how to run them
+There are three main test suites in the project. These are stored under:
 
 ```
-Give an example
+src/test/java -> com.qa.ims
 ```
 
-### Integration Tests 
+The test suites are: 
+*Controllers
+*DAO
+*Domain
 
-Explain what these tests test, why and how to run them
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
+Each test suite has a corresponding test suite that tests if the program has failed correctly. An example of this is:
 
 ```
-Give an example
+CustomerDAOTest.java
 ```
+and
+```
+CustomerDAOTestFail.java
+```
+
+#### Domain
+These tests use JUnit to test the Customer, Item, Order, and OrderLine classes. These consist of constructor tests, getters and setters tests, and method tests.
+
+#### DAO
+These tests use JUnit to test the DAOs that 'bridge the gap' between the objects in Domain and the Database. It feeds in objects to the DAO and checks the output after the database has been updated.
+
+#### Controllers
+These tests use Mockito to test the controllers that connect the User to the DAOs.
+
+To run all of the tests, make sure that a MySQL server is running as either a localhost or GCP instance.
+In the Package Explorer, right-click on the _src/test/java_ folder then Run As, then JUnit Test.
+
+It may take a while to complete all tests.
+
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+To run the .jar file from the command-line, navigate to the directory that holds the _ims-0.0.1-jar-with-dependencies.jar_ file and execute the following command once you have ensured that a MySQL localhost Server is running on your machine:
+
+```
+java -jar ims-0.0.1-jar-with-dependencies.jar
+```
+
+Username:
+```
+root
+```
+
+Password:
+```
+root
+```
+
 
 ## Built With
 
